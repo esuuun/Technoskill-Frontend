@@ -36,28 +36,39 @@ import {  AlertDialog,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger, } from "./ui/alert-dialog";
+  AlertDialogTitle, } from "./ui/alert-dialog";
+import {  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle} from "./ui/dialog";
+import { Input } from "./ui/input";
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  // const [data, setData] = useState([]);
-  // const handleHomePage = async () => {
-  //   try {
-  //     const response = await axios.post("http://localhost:8000/employee/get");
-  //     console.log(response.data);
+  const [editOpen, setEdit] = useState(false)
+  const [data, setData] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  //     setData(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const handleHomePage = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/employee/");
+      console.log(response.data);
 
-  // useEffect(() => {
-  //   handleHomePage();
-  // }, []);
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  function handleDeleteClick() {
+  useEffect(() => {
+    handleHomePage();
+  }, []);
+
+  // DELETE EMPLOYEE
+  function handleDeleteClick(employe) {
+    setSelectedEmployee(employe)
     setDialogOpen(true);
   }
 
@@ -69,36 +80,52 @@ export default function HomePage() {
     
   }
 
-  const data = [
-    {
-      name: "ABC",
-      div: "HR",
-      salary: "Rp 5000",
-      status: "Active",
-      avatar: "https://ui.shadcn.com/avatars/03.png",
-    },
-    {
-      name: "JHK",
-      div: "HR",
-      salary: "Rp 5000",
-      status: "Active",
-      avatar: "https://ui.shadcn.com/avatars/01.png",
-    },
-    {
-      name: "POI",
-      div: "HR",
-      salary: "Rp 5000",
-      status: "Deactive",
-      avatar: "https://ui.shadcn.com/avatars/05.png",
-    },
-    {
-      name: "KKK",
-      div: "HR",
-      salary: "Rp 5000",
-      status: "Deactive",
-      avatar: "https://ui.shadcn.com/avatars/02.png",
-    },
-  ];
+  // EDIT EMPLOYEE
+
+  function handleEditClick(employe) {
+    setSelectedEmployee(employe)
+    setEdit(true)
+  }
+
+  function handleEditClose() {
+    setEdit(false)
+  }
+
+  function handleEditConfirm() {
+    
+  }
+
+
+  // const data = [
+  //   {
+  //     name: "ABC",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Active",
+  //     avatar: "https://ui.shadcn.com/avatars/03.png",
+  //   },
+  //   {
+  //     name: "JHK",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Active",
+  //     avatar: "https://ui.shadcn.com/avatars/01.png",
+  //   },
+  //   {
+  //     name: "POI",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Deactive",
+  //     avatar: "https://ui.shadcn.com/avatars/05.png",
+  //   },
+  //   {
+  //     name: "KKK",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Deactive",
+  //     avatar: "https://ui.shadcn.com/avatars/02.png",
+  //   },
+  // ];
 
   return (
     <div className="flex bg-background">
@@ -133,7 +160,9 @@ export default function HomePage() {
                   <TableRow key={index}>
                     <TableCell className="hidden sm:table-cell">
                       <Avatar>
-                        <AvatarImage src={employe.avatar} />
+                        {employe.gender === 'Male' ? <AvatarImage src='https://ui.shadcn.com/avatars/02.png' /> :
+                        <AvatarImage src='https://ui.shadcn.com/avatars/05.png' />
+                        }
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                     </TableCell>
@@ -141,10 +170,10 @@ export default function HomePage() {
                       {employe.name}
                     </TableCell>
                     <TableCell>
-                      <Badge>{employe.status}</Badge>
+                      <Badge>Active</Badge>
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {employe.div}
+                      {employe.division}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
                       {employe.salary}
@@ -163,8 +192,8 @@ export default function HomePage() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem onClick={handleDeleteClick}>
+                          <DropdownMenuItem onClick={() => handleEditClick(employe)}>Edit</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleDeleteClick(employe)}>
                             Delete
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -204,7 +233,35 @@ export default function HomePage() {
         </AlertDialogContent>
       </AlertDialog>
       
-      {/* Rename Dialog */}
+      {/* Edit Dialog */}
+      <Dialog open={editOpen} onOpenChange={handleEditClose}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit Employee</DialogTitle>
+            <DialogDescription>
+              Make changes to your employe. Click save when you&apos;re done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid items-center gap-4">
+              <label htmlFor="name">Name</label>
+              <Input value={selectedEmployee?.name || ''} id='name' className="w-full" />
+
+              <label htmlFor="gender">Gender</label>
+              <Input value={selectedEmployee?.gender || ''}  id='gender' className="w-full" />
+              
+              <label htmlFor="division">Division</label>
+              <Input value={selectedEmployee?.division || ''}  id='division' className="w-full" />
+
+              <label htmlFor="salary">Salary</label>
+              <Input value={selectedEmployee?.salary || '0'}  id='salary' className="w-full" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={handleEditConfirm}>Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

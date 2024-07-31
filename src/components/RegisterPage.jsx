@@ -16,7 +16,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import HeaderElement from "./elements/HeaderElement";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,9 +43,9 @@ export default function LoginPage() {
       <div className="flex justify-center items-center w-full h-full">
         <Card className="w-full max-w-sm">
           <CardHeader>
-            <CardTitle className="text-3xl">Login</CardTitle>
+            <CardTitle className="text-2xl">Register</CardTitle>
             <CardDescription>
-              Enter your username below to login to your account.
+              Enter your username below to register your account.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
