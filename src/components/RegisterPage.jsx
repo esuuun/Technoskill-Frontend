@@ -37,9 +37,9 @@ export default function RegisterPage() {
 
   return (
     <div className=" bg-background h-screen w-screen flex">
-      <DashboardElement />
+      {/* <DashboardElement /> */}
       <div className="flex flex-col w-screen">
-        <HeaderElement/>
+        {/* <HeaderElement/> */}
       <div className="flex justify-center items-center w-full h-full">
         <Card className="w-full max-w-sm">
           <CardHeader>
@@ -70,9 +70,21 @@ export default function RegisterPage() {
                   required
                 />
             </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Confirm Password</Label>
+              <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+            </div>
           </CardContent>
-          <CardFooter>
-            <Button onClick={handleLogin} className="w-full">Sign in</Button>
+          <CardFooter className='block text-center'>
+              <Button onClick={handleLogin} className="w-full mb-2">Register</Button>
+              Dont have an account?
+              <a href="/login" className="underline">Login</a>
           </CardFooter>
         </Card>
         </div>
