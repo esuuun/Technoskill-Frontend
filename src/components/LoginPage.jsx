@@ -41,7 +41,7 @@ export default function LoginPage() {
       <div className="flex flex-col w-screen">
         {/* <HeaderElement/> */}
       <div className="flex justify-center items-center w-full h-full">
-        <Card className="w-full max-w-sm">
+        <Card className="w-96 max-w-sm">
           <CardHeader>
             <CardTitle className="text-3xl">Login</CardTitle>
             <CardDescription>
@@ -49,7 +49,7 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <div className="grid gap-2">
+            <div className="grid gap-2 pb-4">
               <Label htmlFor="username">Username</Label>
               <Input
                   id="username"
@@ -60,7 +60,7 @@ export default function LoginPage() {
                   required
                 />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-2 pb-4">
               <Label htmlFor="password">Password</Label>
               <Input
                   id="password"

@@ -16,7 +16,7 @@ function App() {
 
         <Route path="/add-employee" element={<AddEmployeePage />} />
 
-        <Route path="/my-info" element={<MyInfoPage />} />
+        <Route path="/profile" element={<MyInfoPage />} />
 
         <Route path="/login" element={<LoginPage />} />
 

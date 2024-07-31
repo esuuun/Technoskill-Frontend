@@ -49,38 +49,59 @@ export default function AddEmployeePage() {
           <CardContent className="grid-gap-4">
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="name">Name</Label>
+<<<<<<< HEAD
                 <Input
                   id="Name"
                   value={name}
                   onChange={(e)=> setName(e.target.value)}
                   placeholder="Employee Name"
+=======
+              <Input
+                type="Name"
+                // placeholder="Ulil"
+>>>>>>> c0ed7b8a56d8efb5fd33e525e7c836c06ab02e7e
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="Gender">Gender</Label>
               <Input
+<<<<<<< HEAD
                 id="Gender"
                   placeholder="Gender"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
+=======
+                type="Gender"
+                // placeholder="Laki-laki"
+>>>>>>> c0ed7b8a56d8efb5fd33e525e7c836c06ab02e7e
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="Division">Division</Label>
               <Input
+<<<<<<< HEAD
                 id="Division"
                   placeholder="Division"
                   value={division}
                   onChange={(e) => setDivision(e.target.value)}
+=======
+                type="Division"
+                // placeholder="Front End"
+>>>>>>> c0ed7b8a56d8efb5fd33e525e7c836c06ab02e7e
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="Salary">Salary</Label>
               <Input
+<<<<<<< HEAD
                 id="Salary"
                   placeholder="Salary"
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
+=======
+                type="Salary"
+                // placeholder="Rp10.000.000,00"
+>>>>>>> c0ed7b8a56d8efb5fd33e525e7c836c06ab02e7e
               />
             </div>
           </CardContent>
