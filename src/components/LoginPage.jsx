@@ -29,7 +29,7 @@ export default function LoginPage() {
       });
       if (response.status !== 200) throw new Error("Login failed");
       console.log(response.data);
-      navigate("/home");
+      navigate("/my-info", { state: { userData: response.data } });
     } catch (error) {
       console.error(error);
     }

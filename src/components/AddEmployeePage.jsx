@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 
 export default function AddEmployeePage() {
   const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
   const [division, setDivision] = useState("");
   const [salary, setSalary] = useState("");
 
@@ -17,6 +18,7 @@ export default function AddEmployeePage() {
     try {
       const response = await axios.post('http://localhost:8000/employee/add', {
         name,
+        gender,
         division,
         salary,
       });
@@ -29,6 +31,7 @@ export default function AddEmployeePage() {
       console.error(error);
     }
   }
+
 
   return (
     <div className="bg-background h-screen w-screen flex">
@@ -46,35 +49,43 @@ export default function AddEmployeePage() {
           <CardContent className="grid-gap-4">
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="name">Name</Label>
-              <Input
-                type="Name"
-                placeholder="Employee Name"
+                <Input
+                  id="Name"
+                  value={name}
+                  onChange={(e)=> setName(e.target.value)}
+                  placeholder="Employee Name"
               />
             </div>
             <div className="grid-gap-2 pb-4">
-              <Label htmlFor="division">Gender</Label>
+              <Label htmlFor="Gender">Gender</Label>
               <Input
-                type="Gender"
-                placeholder="Gender"
+                id="Gender"
+                  placeholder="Gender"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
               />
             </div>
             <div className="grid-gap-2 pb-4">
-              <Label htmlFor="division">Division</Label>
+              <Label htmlFor="Division">Division</Label>
               <Input
-                type="Division"
-                placeholder="Division"
+                id="Division"
+                  placeholder="Division"
+                  value={division}
+                  onChange={(e) => setDivision(e.target.value)}
               />
             </div>
             <div className="grid-gap-2 pb-4">
-              <Label htmlFor="salary">Salary</Label>
+              <Label htmlFor="Salary">Salary</Label>
               <Input
-                type="Salary"
-                placeholder="Salary"
+                id="Salary"
+                  placeholder="Salary"
+                  value={salary}
+                  onChange={(e) => setSalary(e.target.value)}
               />
             </div>
           </CardContent>
           <CardFooter className="items-center justify-center">
-            <Button className="w-full">Add</Button>  
+            <Button className="w-full"  onClick={handleAddEmployee}>Add</Button>  
           </CardFooter> 
         </Card>
       </div>

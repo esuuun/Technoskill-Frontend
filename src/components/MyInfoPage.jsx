@@ -7,9 +7,13 @@ import HeaderElement from "./elements/HeaderElement";
 import { Button } from "./ui/button";
 import { SquareUserRound, UserRound } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useLocation } from "react-router-dom";
 
 export default function MyInfoPage() {
-  const [name, setName] = useState("");
+  const location = useLocation()
+  const { userData } = location.state || {};
+  // const [name, setName] = useState(userData.name);
+  console.log(userData)
   return (
     <div className="bg-background h-screen w-screen flex">
       <DashboardElement />
@@ -23,7 +27,7 @@ export default function MyInfoPage() {
             <CardTitle className="text-2xl">My Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="">Name</p>
+              <p className="">{userData[0].name}</p>
           </CardContent>
         </Card>
       </div>

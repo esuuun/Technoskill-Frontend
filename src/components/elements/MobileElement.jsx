@@ -61,7 +61,7 @@ export default function MobileElement() {
         <nav className="grid gap-2 text-lg font-medium">
           <span href="/" className="flex items-center gap-2 font-semibold mb-3">
             <UsersRound className="text-foreground" />
-            <span className="text-xl font-bold text-foreground">Employee</span>
+            <span className="text-xl font-bold text-foreground">Team<span className="text-primary">Trackr</span> </span>
           </span>
           {MenuList.map((menu, index) => {
             const isActive = location.pathname === menu.path;
