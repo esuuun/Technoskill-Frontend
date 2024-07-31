@@ -3,6 +3,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import HeaderElement from "./elements/HeaderElement";
 
 export default function LoginPage() {
   const [name, setName] = useState("");
@@ -11,54 +23,52 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/manager/login", {name , password});
-      if(response.status !== 200) throw new Error("Login failed");
+      const response = await axios.post("http://localhost:8000/manager/login", {
+        name,
+        password,
+      });
+      if (response.status !== 200) throw new Error("Login failed");
       console.log(response.data);
-      navigate('/home');
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
-  }
-
+  };
 
   return (
-    <div className="bg-[#CED1DA] h-screen w-screen flex">
+    <div className=" bg-background h-screen w-screen flex">
       <DashboardElement />
-
-      <div className="bg-[#2B2E63] w-[622px] h-[675px] m-auto rounded-2xl flex flex-col text-white">
-        <p className="text-[30px] mx-auto mt-20">Login</p>
-
-        <div className="mx-auto mt-10">
-          <p className="text-[20px]">Name</p>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="bg-[#BFCBCE] w-[343px] h-[41px] text-gray-700 px-2"
-          />
+      <div className="flex flex-col w-screen">
+        <HeaderElement/>
+      <div className="flex justify-center items-center w-full h-full">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardDescription>
+              Enter your username below to login to your account.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Username</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="berakmantap"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" required />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full">Sign in</Button>
+          </CardFooter>
+        </Card>
         </div>
-
-        <div className="mx-auto mt-10">
-          <p className="text-[20px]">Password</p>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#BFCBCE] w-[343px] h-[41px] text-gray-700 px-2"
-          />
         </div>
-
-        <div className="mx-auto mt-20 space-y-4">
-          <p
-            className="text-white underline"
-            onClick={() => navigate("/register")}
-          >
-            register?
-          </p>
-
-          <button className="bg-[#6F90AF] p-2 px-3 rounded-2xl" onClick={handleLogin}>
-            Login
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

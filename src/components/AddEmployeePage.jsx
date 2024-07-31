@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DashboardElement from "./elements/DashboardElement";
 import axios from 'axios';
+import HeaderElement from "./elements/HeaderElement";
 
 export default function AddEmployeePage() {
   const [name, setName] = useState("");
@@ -25,9 +26,10 @@ export default function AddEmployeePage() {
   }
 
   return (
-    <div className="bg-[#CED1DA] h-screen w-screen flex">
+    <div className="bg-background h-screen w-screen flex">
       <DashboardElement />
-
+      <div className="flex flex-col w-screen">
+        <HeaderElement/>
       <div className="bg-[#2B2E63] w-[622px] h-[675px] m-auto rounded-2xl flex flex-col text-white">
         <p className="text-[30px] mx-auto mt-20">Add New Employee</p>
 
@@ -61,7 +63,7 @@ export default function AddEmployeePage() {
         <div className="mx-auto mt-20">
           <button className="bg-[#6F90AF] p-2 px-3 rounded-2xl" onClick={handleAddEmployee}>Add</button>
         </div>
-      </div>
+      </div></div>
     </div>
   );
 }

@@ -3,13 +3,16 @@ import { useState } from "react";
 import DashboardElement from "./elements/DashboardElement";
 
 import employeeIcon from "../assets/employee.svg";
+import HeaderElement from "./elements/HeaderElement";
 
 export default function MyInfoPage() {
   const [name, setName] = useState("");
   return (
-    <div className="bg-[#CED1DA] h-screen w-screen flex">
+    <div className="bg-background h-screen w-screen flex">
       <DashboardElement />
 
+      <div className="flex flex-col w-screen">
+        <HeaderElement/>
       <div className="bg-[#2B2E63] w-[622px] h-[675px] m-auto rounded-2xl flex flex-col text-white">
         <img src={employeeIcon} className="w-[240px] mx-auto mt-24" />
 
@@ -23,7 +26,7 @@ export default function MyInfoPage() {
             className="bg-[#BFCBCE] w-[343px] h-[41px] text-gray-700 px-2"
           />
         </div>
-      </div>
+      </div></div>
     </div>
   );
 }
