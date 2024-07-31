@@ -1,8 +1,7 @@
-  import { useState } from "react";
+  import { useContext, useState } from "react";
   import { useNavigate } from "react-router-dom";
   import axios from "axios";
 
-  import DashboardElement from "./elements/DashboardElement";
   import {
     Card,
     CardContent,
@@ -14,11 +13,12 @@
   import { Button } from "./ui/button";
   import { Input } from "./ui/input";
   import { Label } from "./ui/label";
-  import HeaderElement from "./elements/HeaderElement";
+import { UserContext } from "@/context/UserContext";
 
   export default function LoginPage() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const { login } = useContext(UserContext);
 
     const navigate = useNavigate();
     const handleLogin = async () => {
@@ -28,7 +28,8 @@
           password,
         });
         if (response.status !== 200) throw new Error("Login failed");
-        console.log(response.data);
+        // console.log(response.data);
+        login(response.data[0])
         navigate("/profile", { state: { userData: response.data } });
       } catch (error) {
         console.error(error);
@@ -37,9 +38,7 @@
 
     return (
       <div className=" bg-background h-screen w-screen flex">
-        {/* <DashboardElement /> */}
         <div className="flex flex-col w-screen">
-          {/* <HeaderElement/> */}
         <div className="flex justify-center items-center w-full h-full">
           <Card className="w-96 max-w-sm">
             <CardHeader>
