@@ -134,7 +134,7 @@ export default function HomePage() {
         <HeaderElement />
         <Card className="m-10">
           <CardHeader>
-            <CardTitle>Employees</CardTitle>
+            <CardTitle className="text-3xl">Employees</CardTitle>
             <CardDescription>Manage your employee.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -149,7 +149,7 @@ export default function HomePage() {
                   <TableHead className="hidden md:table-cell">
                     Division
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">Salary</TableHead>
+                    <TableHead className="hidden md:table-cell">Salary</TableHead>
                   <TableHead>
                     <span className="sr-only">Actions</span>
                   </TableHead>

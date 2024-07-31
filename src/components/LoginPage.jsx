@@ -43,7 +43,7 @@ export default function LoginPage() {
       <div className="flex justify-center items-center w-full h-full">
         <Card className="w-full max-w-sm">
           <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardTitle className="text-3xl">Login</CardTitle>
             <CardDescription>
               Enter your username below to login to your account.
             </CardDescription>
