@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DashboardElement from "./elements/DashboardElement";
 
@@ -7,13 +7,27 @@ import HeaderElement from "./elements/HeaderElement";
 import { Button } from "./ui/button";
 import { SquareUserRound, UserRound } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export default function MyInfoPage() {
-  const location = useLocation()
-  const { userData } = location.state || {};
-  // const [name, setName] = useState(userData.name);
-  console.log(userData)
+  const [username, setUsername] = useState('')
+
+  const handleProfilePage = async () => {
+    try {
+      const name = 'admin'
+      const response = await axios.get(`http://localhost:8000/manager/${name}`);
+      console.log(response.data);
+      setUsername(response.data.name)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleProfilePage();
+  }, []);
+
   return (
     <div className="bg-background h-screen w-screen flex">
       <DashboardElement />
@@ -26,7 +40,7 @@ export default function MyInfoPage() {
             <CardTitle className="text-2xl">My Information</CardTitle>
           </CardHeader>
           <CardContent>
-              <p className="">{userData[0].name}</p>
+              <p className="">{username}</p>
           </CardContent>
         </Card>
       </div>
