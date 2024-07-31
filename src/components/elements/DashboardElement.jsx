@@ -25,9 +25,9 @@ export default function DashboardElement() {
 
   const MenuList = [
     {
-      name: "My info",
-      Icon: UserRound,
-      path: "/my-info",
+      name: "Home",
+      Icon: Home,
+      path: "/home",
     },
     {
       name: "Add Employee",
@@ -35,9 +35,9 @@ export default function DashboardElement() {
       path: "/add-employee",
     },
     {
-      name: "Home",
-      Icon: Home,
-      path: "/home",
+      name: "Profile",
+      Icon: UserRound,
+      path: "/profile",
     },
     {
       name: "Login",

@@ -27,9 +27,9 @@ export default function MobileElement() {
 
   const MenuList = [
     {
-      name: "My info",
-      Icon: UserRound,
-      path: "/my-info",
+      name: "Home",
+      Icon: Home,
+      path: "/home",
     },
     {
       name: "Add Employee",
@@ -37,11 +37,10 @@ export default function MobileElement() {
       path: "/add-employee",
     },
     {
-      name: "Home",
-      Icon: Home,
-      path: "/home",
+      name: "Profile",
+      Icon: UserRound,
+      path: "/profile",
     },
-
     {
       name: "Login",
       Icon: LogIn,
