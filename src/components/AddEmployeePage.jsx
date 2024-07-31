@@ -48,28 +48,28 @@ export default function AddEmployeePage() {
               <Label htmlFor="name">Name</Label>
               <Input
                 type="Name"
-                placeholder="Employee Name"
+                // placeholder="Ulil"
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="division">Gender</Label>
               <Input
                 type="Gender"
-                placeholder="Gender"
+                // placeholder="Laki-laki"
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="division">Division</Label>
               <Input
                 type="Division"
-                placeholder="Division"
+                // placeholder="Front End"
               />
             </div>
             <div className="grid-gap-2 pb-4">
               <Label htmlFor="salary">Salary</Label>
               <Input
                 type="Salary"
-                placeholder="Salary"
+                // placeholder="Rp10.000.000,00"
               />
             </div>
           </CardContent>
