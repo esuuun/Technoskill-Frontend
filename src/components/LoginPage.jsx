@@ -23,7 +23,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/manager/login", {
+      const response = await axios.post("http://localhost:8000/manager/login", {
         name,
         password,
       });
@@ -37,9 +37,9 @@ export default function LoginPage() {
 
   return (
     <div className=" bg-background h-screen w-screen flex">
-      <DashboardElement />
+      {/* <DashboardElement /> */}
       <div className="flex flex-col w-screen">
-        <HeaderElement/>
+        {/* <HeaderElement/> */}
       <div className="flex justify-center items-center w-full h-full">
         <Card className="w-96 max-w-sm">
           <CardHeader>
@@ -71,8 +71,9 @@ export default function LoginPage() {
                 />
             </div>
           </CardContent>
-          <CardFooter>
-            <Button onClick={handleLogin} className="w-full">Sign in</Button>
+          <CardFooter className='block text-center'>
+              <Button onClick={handleLogin} className="w-full mb-2">Sign in</Button>
+              Dont have an account? <a href="/register" className="underline">Sign up</a>
           </CardFooter>
         </Card>
         </div>
