@@ -8,7 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { Input } from "./ui/input";
-import { Badge } from "./ui/badge";
 
 export default function MyInfoPage() {
   const { user } = useContext(UserContext);

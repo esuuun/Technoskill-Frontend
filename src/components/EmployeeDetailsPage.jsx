@@ -12,6 +12,7 @@ import {
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
+import { Loader2Icon } from "lucide-react";
 
 export default function EmployeeDetailsPage() {
   const { id } = useParams();
@@ -32,7 +33,7 @@ export default function EmployeeDetailsPage() {
   }, [id]);
 
   if (!employee) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center w-screen h-screen items-center"><Loader2Icon className="animate-spin" size={40}/></div>;
   }
 
   return (

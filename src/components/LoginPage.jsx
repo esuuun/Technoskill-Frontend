@@ -32,7 +32,7 @@ import { useToast } from "./ui/use-toast";
         if (response.status !== 200) throw new Error("Login failed");
         // console.log(response.data);
         login(response.data[0])
-        navigate("/profile", { state: { userData: response.data } });
+        navigate("/", { state: { userData: response.data } });
         toast({
           title: "Logged in successfully!",
           description: "Start to manage your employees!",

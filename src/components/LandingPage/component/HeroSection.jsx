@@ -1,16 +1,17 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronRightIcon, LogIn, UsersRound } from "lucide-react";
-import { useEffect, useState } from "react";
+import { UserContext } from "@/context/UserContext";
+import { ChevronRightIcon, LayoutDashboard, LogIn, LogOut, UsersRound } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [state, setState] = useState(false);
+  const { user } = useContext(UserContext)
+  const { logout} = useContext(UserContext)
 
   const navigation = [
-    { title: "Features", path: "/" },
-    { title: "Integrations", path: "/" },
-    { title: "Customers", path: "/" },
-    { title: "Pricing", path: "/" },
+    { title: "Features", path: "#features" },
+    { title: "Our Team", path: "#teams" },
   ];
 
   useEffect(() => {
@@ -98,19 +99,34 @@ const HeroSection = () => {
                   {navigation.map((item, idx) => {
                     return (
                       <li key={idx} className="">
-                        <a href={item.path} className="block">
+                        <a href={item.path} className="block text-base hover:text-primary">
                           {item.title}
                         </a>
                       </li>
                     );
                   })}
                 </ul>
-                <Button className="">
+                {user ?
+                  <div className="flex gap-5">
+                  <Button className="hover:bg-transparent hover:ring-2 ring-ring">
+                  <a href="/home" className="flex gap-2 items-center">
+                    Dashboard
+                    <LayoutDashboard className="h-4 w-4" />
+                  </a>
+                    </Button>
+                    <Button className="text-foreground bg-transparent ring-1 ring-ring hover:bg-secondary" onClick={() => logout()}>
+                  <a href="/" className="flex gap-2 items-center">
+                    Logout
+                    <LogOut className="h-4 w-4" />
+                  </a>
+                    </Button>
+                  </div>
+                  : <Button className="">
                   <a href="/login" className="flex gap-2 items-center">
                     Sign in
                     <LogIn className="h-4 w-4" />
                   </a>
-                </Button>
+                </Button>}
               </div>
             </div>
           </nav>
@@ -140,25 +156,31 @@ const HeroSection = () => {
                   </svg>
                 </p>
               </a></div>
-              <h1 className="text-4xl  font-extrabold sm:text-5xl">
+              <h1 className="text-4xl  font-extrabold sm:text-5xl ">
                 Empower Your Team Management with <span className="underline underline-offset-4 decoration-primary">Team<span className="text-primary">Trackr</span></span>
               </h1>
               <p>
               Easily oversee tasks, track performance, and enhance productivity. TeamTrackr helps you keep your team organized and efficient.
               </p>
               <div className="flex justify-center md:justify-normal items-center gap-x-3 sm:text-sm">
-                <Button >
+                {user ?<Button >
+                  <a href="/home" className="flex items-center gap-3">
+                    Get started
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </a>
+                </Button>:
+                  <Button >
                   <a href="/login" className="flex items-center gap-3">
                     Get started
                     <ChevronRightIcon className="h-4 w-4" />
                   </a>
-                </Button>
+                </Button>}
               </div>
             </div>
             <div className="flex-1 hidden md:block">
               <img
-                src="https://www.tailframes.com/images/browser-mockup.webp"
-                className="max-w-3xl absolute z-10"
+                src="src\assets\img\dashboardImg.png"
+                className="max-w-4xl absolute z-10 rounded-xl"
               />
             </div>
           </div>

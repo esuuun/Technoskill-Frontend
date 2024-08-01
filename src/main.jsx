@@ -6,8 +6,8 @@ import { ThemeProvider } from './components/ThemeProvider.jsx'
 import { Toaster } from './components/ui/toaster.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ThemeProvider  defaultTheme="dark" storageKey="vite-ui-theme">
+  <React.StrictMode >
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <App />
       <Toaster/>
       </ThemeProvider>
