@@ -49,7 +49,14 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { ScrollArea } from "./ui/scroll-area";
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -159,7 +166,7 @@ export default function HomePage() {
       ...prev,
       [id]: value,
     }));
-    console.log(selectedEmployee)
+    console.log(selectedEmployee);
   };
 
   const handleSelectChange = (value) => {
@@ -175,6 +182,7 @@ export default function HomePage() {
       <div className="flex flex-col w-screen ">
         <HeaderElement />
         <Card className="m-10">
+          <ScrollArea className='h-screen w-full rounded-md border'>
           <CardHeader>
             <CardTitle className="text-3xl">Employees</CardTitle>
             <CardDescription>Manage your employee.</CardDescription>
@@ -258,7 +266,8 @@ export default function HomePage() {
             <div className="text-xs text-muted-foreground">
               Showing <strong>1-10</strong> of <strong>32</strong> employees
             </div>
-          </CardFooter>
+            </CardFooter>
+            </ScrollArea>
         </Card>
       </div>
 
@@ -304,12 +313,9 @@ export default function HomePage() {
 
               <label htmlFor="gender">Division</label>
 
-              <Select
-                id='gender'
-                onValueChange={handleSelectChange}
-              >
+              <Select id="gender" onValueChange={handleSelectChange}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={selectedEmployee?.gender ||''} />
+                  <SelectValue placeholder={selectedEmployee?.gender || ""} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Male">Male</SelectItem>
@@ -327,7 +333,7 @@ export default function HomePage() {
 
               <label htmlFor="salary">Salary</label>
               <Input
-                type='number'
+                type="number"
                 placeholder={selectedEmployee?.salary || 0}
                 id="salary"
                 onChange={handleInputChange}

@@ -6,18 +6,8 @@ import {
   LogIn,
 } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
-import HeaderElement from "./HeaderElement";
 
 export default function DashboardElement() {
   const navigate = useNavigate();
@@ -53,7 +43,7 @@ export default function DashboardElement() {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <div href="/" className="flex items-center gap-2 font-semibold">
               <UsersRound className="text-foreground" />
-              <span className="text-xl font-bold text-foreground">Team<span className="text-primary">Trackr</span></span>
+              <a href='/' className="text-xl font-bold text-foreground">Team<span className="text-primary">Trackr</span></a>
             </div>
           </div>
 
