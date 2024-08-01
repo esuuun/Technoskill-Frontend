@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useToast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 
 export default function AddEmployeePage() {
   const { toast } = useToast();
@@ -43,6 +44,7 @@ export default function AddEmployeePage() {
       toast({
         title: "Succesfully add new employee!",
         description: "Check your new employee on home.",
+        action: <ToastAction altText="Go to home page"><a href="/home">Go to home page</a></ToastAction>,
       });
 
       console.log(response.data);
