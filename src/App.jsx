@@ -8,6 +8,7 @@ import RegisterPage from "./components/RegisterPage";
 import EmployeeDetailsPage from "./components/EmployeeDetailsPage";
 import { UserProvider } from "./context/UserContext";
 import LandingPage from "./components/LandingPage/LandingPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -17,17 +18,17 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage/>} />
 
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
 
-          <Route path="/add-employee" element={<AddEmployeePage />} />
+          <Route path="/add-employee" element={<ProtectedRoute><AddEmployeePage /></ProtectedRoute>} />
 
-          <Route path="/profile" element={<MyInfoPage />} />
+          <Route path="/profile" element={<ProtectedRoute><MyInfoPage /></ProtectedRoute>} />
 
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/register" element={<RegisterPage />} />
 
-          <Route path="/employee/:id" element={<EmployeeDetailsPage />} />
+          <Route path="/employee/:id" element={<ProtectedRoute><EmployeeDetailsPage /></ProtectedRoute>} />
 
           {/* Input rute lain di sini */}
         </Routes>
