@@ -7,7 +7,6 @@ import {
   LogOut,
 } from "lucide-react";
 
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -17,7 +16,7 @@ import { UserContext } from "@/context/UserContext";
 export default function MobileElement() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {logout} = useContext(UserContext)
+  const { logout } = useContext(UserContext);
 
   const MenuList = [
     {
@@ -49,7 +48,9 @@ export default function MobileElement() {
         <nav className="grid gap-2 text-lg font-medium">
           <span href="/" className="flex items-center gap-2 font-semibold mb-3">
             <UsersRound className="text-foreground" />
-            <a href="/" className="text-xl font-bold text-foreground">Team<span className="text-primary">Trackr</span> </a>
+            <a href="/" className="text-xl font-bold text-foreground">
+              Team<span className="text-primary">Trackr</span>{" "}
+            </a>
           </span>
           {MenuList.map((menu, index) => {
             const isActive = location.pathname === menu.path;
@@ -68,16 +69,18 @@ export default function MobileElement() {
               </span>
             );
           })}
+          <div className="bg-secondary w-full h-px"></div>
+
           <span
-                className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer`}
+            className={`mt-2 mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer`}
             onClick={() => {
-              logout()
-              navigate('/')}
-            }
-              >
-                <LogOut className="h-5 w-5" />
-                Logout
-              </span>
+              logout();
+              navigate("/");
+            }}
+          >
+            <LogOut className="h-5 w-5" />
+            Logout
+          </span>
         </nav>
       </SheetContent>
     </Sheet>

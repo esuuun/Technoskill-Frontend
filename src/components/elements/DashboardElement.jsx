@@ -54,7 +54,7 @@ export default function DashboardElement() {
                   <div
                     key={index}
                     href={menu.path}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary cursor-pointer ${
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground cursor-pointer ${
                       isActive && "bg-muted text-primary"
                     }`}
                     onClick={() => navigate(menu.path)}
@@ -64,9 +64,10 @@ export default function DashboardElement() {
                   </div>
                 );
               })}
+            <div className="bg-secondary w-full h-px"></div>
             <a
                     href='/'
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary cursor-pointer`}
+                    className={`mt-2 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground cursor-pointer`}
                     onClick={() => logout()}
                   >
                     <LogOut className="h-4 w-4" />
