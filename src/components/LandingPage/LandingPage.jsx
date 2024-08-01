@@ -4,7 +4,7 @@ import TeamSection from "./component/TeamSection";
 
 function LandingPage() {
   return (
-    <div className="flex flex-col gap-20 overflow-hidden items-center md:items-stretch ">
+    <div className="flex flex-col gap-16 overflow-hidden items-center md:items-stretch ">
       <HeroSection />
       <FeatureSection />
       <TeamSection />
