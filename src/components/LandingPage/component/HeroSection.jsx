@@ -1,10 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronRightIcon, LogIn, UsersRound } from "lucide-react";
-import { useEffect, useState } from "react";
+import { UserContext } from "@/context/UserContext";
+import { ChevronRightIcon, LayoutDashboard, LogIn, LogOut, UsersRound } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [state, setState] = useState(false);
+  const { user } = useContext(UserContext)
+  const { logout} = useContext(UserContext)
 
   const navigation = [
     { title: "Features", path: "/" },
@@ -105,12 +108,27 @@ const HeroSection = () => {
                     );
                   })}
                 </ul>
-                <Button className="">
+                {user ?
+                  <div className="flex gap-5">
+                  <Button className="hover:bg-transparent hover:ring-2 ring-ring">
+                  <a href="/home" className="flex gap-2 items-center">
+                    Dashboard
+                    <LayoutDashboard className="h-4 w-4" />
+                  </a>
+                    </Button>
+                    <Button className="bg-transparent ring-1 ring-muted hover:bg-secondary" onClick={() => logout()}>
+                  <a href="/" className="flex gap-2 items-center">
+                    Logout
+                    <LogOut className="h-4 w-4" />
+                  </a>
+                    </Button>
+                  </div>
+                  : <Button className="">
                   <a href="/login" className="flex gap-2 items-center">
                     Sign in
                     <LogIn className="h-4 w-4" />
                   </a>
-                </Button>
+                </Button>}
               </div>
             </div>
           </nav>
@@ -147,12 +165,18 @@ const HeroSection = () => {
               Easily oversee tasks, track performance, and enhance productivity. TeamTrackr helps you keep your team organized and efficient.
               </p>
               <div className="flex justify-center md:justify-normal items-center gap-x-3 sm:text-sm">
-                <Button >
+                {user ?<Button >
+                  <a href="/home" className="flex items-center gap-3">
+                    Get started
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </a>
+                </Button>:
+                  <Button >
                   <a href="/login" className="flex items-center gap-3">
                     Get started
                     <ChevronRightIcon className="h-4 w-4" />
                   </a>
-                </Button>
+                </Button>}
               </div>
             </div>
             <div className="flex-1 hidden md:block">

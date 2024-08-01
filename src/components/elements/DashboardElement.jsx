@@ -1,15 +1,18 @@
+import { UserContext } from "@/context/UserContext";
 import {
   Home,
   UsersRound,
   UserRound,
   UserRoundPlus,
-  LogIn,
+  LogOut,
 } from "lucide-react";
+import { useContext } from "react";
 
 
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function DashboardElement() {
+  const { logout } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,11 +31,6 @@ export default function DashboardElement() {
       name: "Profile",
       Icon: UserRound,
       path: "/profile",
-    },
-    {
-      name: "Login",
-      Icon: LogIn,
-      path: "/login",
     },
   ];
 
@@ -66,6 +64,14 @@ export default function DashboardElement() {
                   </div>
                 );
               })}
+            <div
+                    href='/'
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary cursor-pointer`}
+                    onClick={() => logout()}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Logout</span>
+                  </div>
             </nav>
           </div>
           <div className="mt-auto p-4"></div>

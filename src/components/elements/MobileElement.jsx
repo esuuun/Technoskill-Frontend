@@ -3,27 +3,21 @@ import {
   UsersRound,
   UserRound,
   UserRoundPlus,
-  LogIn,
   Menu,
+  LogOut,
 } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import HeaderElement from "./HeaderElement";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useContext } from "react";
+import { UserContext } from "@/context/UserContext";
 
 export default function MobileElement() {
   const navigate = useNavigate();
   const location = useLocation();
+  const {logout} = useContext(UserContext)
 
   const MenuList = [
     {
@@ -40,11 +34,6 @@ export default function MobileElement() {
       name: "Profile",
       Icon: UserRound,
       path: "/profile ",
-    },
-    {
-      name: "Login",
-      Icon: LogIn,
-      path: "/login",
     },
   ];
 
@@ -79,6 +68,16 @@ export default function MobileElement() {
               </span>
             );
           })}
+          <span
+                className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer`}
+            onClick={() => {
+              logout()
+              navigate('/')}
+            }
+              >
+                <LogOut className="h-5 w-5" />
+                Logout
+              </span>
         </nav>
       </SheetContent>
     </Sheet>
