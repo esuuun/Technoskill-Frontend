@@ -34,8 +34,8 @@ import { useToast } from "./ui/use-toast";
         login(response.data[0])
         navigate("/profile", { state: { userData: response.data } });
         toast({
-          title: "Login successfully!",
-          description: "Manage your employee now!",
+          title: "Logged in successfully!",
+          description: "Start to manage your employees!",
         });
       } catch (error) {
         toast({
@@ -64,7 +64,7 @@ import { useToast } from "./ui/use-toast";
                 <Input
                     id="username"
                     type="text"
-                    placeholder="berakmantap"
+                    placeholder="Username"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
