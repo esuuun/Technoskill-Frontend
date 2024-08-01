@@ -29,29 +29,34 @@ import {
 import { Button } from "./ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import {  AlertDialog,
+import {
+  AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle, } from "./ui/alert-dialog";
-import {  Dialog,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
+import {
+  Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle} from "./ui/dialog";
+  DialogTitle,
+} from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editOpen, setEdit] = useState(false)
+  const [editOpen, setEdit] = useState(false);
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const {toast} = useToast()
+  const { toast } = useToast();
 
   const handleHomePage = async () => {
     try {
@@ -70,20 +75,23 @@ export default function HomePage() {
 
   // DELETE EMPLOYEE
   function handleDeleteClick(employe) {
-    setSelectedEmployee(employe)
+    setSelectedEmployee(employe);
     // console.log(selectedEmployee.id)
     setDialogOpen(true);
   }
 
   function handleDeleteClose() {
+    setSelectedEmployee(null);
     setDialogOpen(false);
   }
 
   async function handleDeleteConfirm() {
     try {
-      const response = await axios.delete(`http://localhost:8000/employee/${selectedEmployee.id}`)
-      console.log(response.data)
-      handleHomePage() //biar ke refresh
+      const response = await axios.delete(
+        `http://localhost:8000/employee/${selectedEmployee.id}`
+      );
+      console.log(response.data);
+      handleHomePage(); //biar ke refresh
       toast({
         title: "Employee deleted!",
         description: "Your selected employee now has deleted from our server ",
@@ -94,29 +102,71 @@ export default function HomePage() {
         title: "Uh oh! Something went wrong.",
         description: "Your username or password is incorect.",
       });
-      console.error(error)
+      console.error(error);
     } finally {
-      setDialogOpen(false)
+      setDialogOpen(false);
     }
   }
 
   // EDIT EMPLOYEE
 
   function handleEditClick(employe) {
-    setSelectedEmployee(employe)
-    setEdit(true)
+    setSelectedEmployee(employe);
+    setEdit(true);
   }
 
   function handleEditClose() {
-    setEdit(false)
+    setSelectedEmployee(null);
+    setEdit(false);
   }
 
-  function handleEditConfirm() {
-    
+  async function handleEditConfirm() {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/employee/${selectedEmployee.id}`,
+        {
+          name: selectedEmployee.name,
+          gender: selectedEmployee.gender,
+          division: selectedEmployee.division,
+          salary: selectedEmployee.salary,
+        }
+      );
+      console.log(response.data);
+      handleHomePage(); //refresh lagi
+      toast({
+        title: "Employee succesfully edited!",
+        description: "Your selected employee now has edited from our server ",
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Your username or password is incorect.",
+      });
+    } finally {
+      setEdit(false);
+    }
   }
 
   const formatCurrency = (amount) => {
     return parseInt(amount).toLocaleString("id-ID");
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setSelectedEmployee((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+    console.log(selectedEmployee)
+  };
+
+  const handleSelectChange = (value) => {
+    setSelectedEmployee((prev) => ({
+      ...prev,
+      division: value,
+    }));
   };
 
   return (
@@ -141,7 +191,7 @@ export default function HomePage() {
                   <TableHead className="hidden md:table-cell">
                     Division
                   </TableHead>
-                    <TableHead className="hidden md:table-cell">Salary</TableHead>
+                  <TableHead className="hidden md:table-cell">Salary</TableHead>
                   <TableHead>
                     <span className="sr-only">Actions</span>
                   </TableHead>
@@ -152,9 +202,11 @@ export default function HomePage() {
                   <TableRow key={index}>
                     <TableCell className="hidden sm:table-cell">
                       <Avatar>
-                        {employe.gender === 'Male' ? <AvatarImage src='https://ui.shadcn.com/avatars/02.png' /> :
-                        <AvatarImage src='https://ui.shadcn.com/avatars/05.png' />
-                        }
+                        {employe.gender === "Male" ? (
+                          <AvatarImage src="https://ui.shadcn.com/avatars/02.png" />
+                        ) : (
+                          <AvatarImage src="https://ui.shadcn.com/avatars/05.png" />
+                        )}
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                     </TableCell>
@@ -168,7 +220,7 @@ export default function HomePage() {
                       {employe.division}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                    Rp{formatCurrency(employe.salary)}
+                      Rp{formatCurrency(employe.salary)}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
@@ -184,8 +236,14 @@ export default function HomePage() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem onClick={() => handleEditClick(employe)}>Edit</DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleDeleteClick(employe)}>
+                          <DropdownMenuItem
+                            onClick={() => handleEditClick(employe)}
+                          >
+                            Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleDeleteClick(employe)}
+                          >
                             Delete
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -224,7 +282,7 @@ export default function HomePage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      
+
       {/* Edit Dialog */}
       <Dialog open={editOpen} onOpenChange={handleEditClose}>
         <DialogContent className="sm:max-w-[425px]">
@@ -237,16 +295,44 @@ export default function HomePage() {
           <div className="grid gap-4 py-4">
             <div className="grid items-center gap-4">
               <label htmlFor="name">Name</label>
-              <Input value={selectedEmployee?.name || ''} id='name' className="w-full" />
+              <Input
+                value={selectedEmployee?.name || ""}
+                id="name"
+                onChange={handleInputChange}
+                className="w-full"
+              />
 
-              <label htmlFor="gender">Gender</label>
-              <Input value={selectedEmployee?.gender || ''}  id='gender' className="w-full" />
-              
+              <label htmlFor="gender">Division</label>
+
+              <Select
+                id='gender'
+                onValueChange={handleSelectChange}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={selectedEmployee?.gender ||''} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Male">Male</SelectItem>
+                  <SelectItem value="Female">Female</SelectItem>
+                </SelectContent>
+              </Select>
+
               <label htmlFor="division">Division</label>
-              <Input value={selectedEmployee?.division || ''}  id='division' className="w-full" />
+              <Input
+                value={selectedEmployee?.division || ""}
+                id="division"
+                onChange={handleInputChange}
+                className="w-full"
+              />
 
               <label htmlFor="salary">Salary</label>
-              <Input value={selectedEmployee?.salary || '0'}  id='salary' className="w-full" />
+              <Input
+                type='number'
+                placeholder={selectedEmployee?.salary || 0}
+                id="salary"
+                onChange={handleInputChange}
+                className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
             </div>
           </div>
           <DialogFooter>
@@ -258,34 +344,33 @@ export default function HomePage() {
   );
 }
 
-
-  // const data = [
-  //   {
-  //     name: "ABC",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Active",
-  //     avatar: "https://ui.shadcn.com/avatars/03.png",
-  //   },
-  //   {
-  //     name: "JHK",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Active",
-  //     avatar: "https://ui.shadcn.com/avatars/01.png",
-  //   },
-  //   {
-  //     name: "POI",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Deactive",
-  //     avatar: "https://ui.shadcn.com/avatars/05.png",
-  //   },
-  //   {
-  //     name: "KKK",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Deactive",
-  //     avatar: "https://ui.shadcn.com/avatars/02.png",
-  //   },
-  // ];
+// const data = [
+//   {
+//     name: "ABC",
+//     div: "HR",
+//     salary: "Rp 5000",
+//     status: "Active",
+//     avatar: "https://ui.shadcn.com/avatars/03.png",
+//   },
+//   {
+//     name: "JHK",
+//     div: "HR",
+//     salary: "Rp 5000",
+//     status: "Active",
+//     avatar: "https://ui.shadcn.com/avatars/01.png",
+//   },
+//   {
+//     name: "POI",
+//     div: "HR",
+//     salary: "Rp 5000",
+//     status: "Deactive",
+//     avatar: "https://ui.shadcn.com/avatars/05.png",
+//   },
+//   {
+//     name: "KKK",
+//     div: "HR",
+//     salary: "Rp 5000",
+//     status: "Deactive",
+//     avatar: "https://ui.shadcn.com/avatars/02.png",
+//   },
+// ];
