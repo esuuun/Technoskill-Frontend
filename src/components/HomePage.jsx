@@ -44,12 +44,14 @@ import {  Dialog,
   DialogHeader,
   DialogTitle} from "./ui/dialog";
 import { Input } from "./ui/input";
+import { useToast } from "./ui/use-toast";
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editOpen, setEdit] = useState(false)
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const {toast} = useToast()
 
   const handleHomePage = async () => {
     try {
@@ -69,6 +71,7 @@ export default function HomePage() {
   // DELETE EMPLOYEE
   function handleDeleteClick(employe) {
     setSelectedEmployee(employe)
+    // console.log(selectedEmployee.id)
     setDialogOpen(true);
   }
 
@@ -76,8 +79,25 @@ export default function HomePage() {
     setDialogOpen(false);
   }
 
-  function handleDeleteConfirm() {
-    
+  async function handleDeleteConfirm() {
+    try {
+      const response = await axios.delete(`http://localhost:8000/employee/${selectedEmployee.id}`)
+      console.log(response.data)
+      handleHomePage() //biar ke refresh
+      toast({
+        title: "Employee deleted!",
+        description: "Your selected employee now has deleted from our server ",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Your username or password is incorect.",
+      });
+      console.error(error)
+    } finally {
+      setDialogOpen(false)
+    }
   }
 
   // EDIT EMPLOYEE
