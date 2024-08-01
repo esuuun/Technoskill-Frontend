@@ -42,8 +42,8 @@ export default function AddEmployeePage() {
 
       if (response.status !== 201) throw new Error("Add employee failed");
       toast({
-        title: "Succesfully add new employee!",
-        description: "Check your new employee on home.",
+        title: "Employee Added Successfully!",
+        description: "You can now view the employee details on the home screen.",
         action: <ToastAction altText="Go to home page"><a href="/home">Go to home page</a></ToastAction>,
       });
 

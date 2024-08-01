@@ -102,8 +102,8 @@ export default function HomePage() {
       console.log(response.data);
       handleHomePage(); //biar ke refresh
       toast({
-        title: "Employee deleted!",
-        description: "Your selected employee now has deleted from our server ",
+        title: "Employee Deleted Succesfully!",
+        description: "The employee has been removed. You can no longer view their details on the home screen.",
       });
     } catch (error) {
       toast({
@@ -289,10 +289,10 @@ export default function HomePage() {
       <AlertDialog open={dialogOpen} onOpenChange={handleDeleteClose}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>Warning: Permanent Deletion</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              employee and remove your employe data from our servers.
+              This action will permanently delete data for the selected employee and cannot be undone. 
+              Please confirm that you wish to proceed.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
