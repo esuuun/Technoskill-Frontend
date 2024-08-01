@@ -39,7 +39,7 @@ export default function MobileElement() {
     {
       name: "Profile",
       Icon: UserRound,
-      path: "/profile",
+      path: "/profile ",
     },
     {
       name: "Login",

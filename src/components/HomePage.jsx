@@ -49,6 +49,7 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
+<<<<<<< HEAD
 import {
   Select,
   SelectContent,
@@ -57,6 +58,10 @@ import {
   SelectValue,
 } from "./ui/select";
 import { ScrollArea } from "./ui/scroll-area";
+=======
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { useNavigate } from "react-router-dom";
+>>>>>>> bba5c5e0bb5093f53777c753178397ff7f9583a4
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -64,6 +69,7 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleHomePage = async () => {
     try {
@@ -176,6 +182,12 @@ export default function HomePage() {
     }));
   };
 
+  // EMPLOYEE DETAILS
+  const handleEmployeeClick = (employeeId) => {
+    navigate(`/employee/${employeeId}`);
+  };
+  
+
   return (
     <div className="flex bg-background">
       <DashboardElement />
@@ -219,7 +231,13 @@ export default function HomePage() {
                       </Avatar>
                     </TableCell>
                     <TableCell className="font-medium">
-                      {employe.name}
+                      <Button
+                        variant="ghost"
+                        className="p-0 h-auto font-medium text-white hover:text-primary hover:bg-transparent hover:no-underline"
+                        onClick={() => handleEmployeeClick(employe.id)}
+                      >
+                        {employe.name}
+                      </Button>
                     </TableCell>
                     <TableCell>
                       <Badge>Active</Badge>
