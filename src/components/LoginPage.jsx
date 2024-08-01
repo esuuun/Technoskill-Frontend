@@ -14,11 +14,13 @@
   import { Input } from "./ui/input";
   import { Label } from "./ui/label";
 import { UserContext } from "@/context/UserContext";
+import { useToast } from "./ui/use-toast";
 
   export default function LoginPage() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const { login } = useContext(UserContext);
+    const {toast} = useToast()
 
     const navigate = useNavigate();
     const handleLogin = async () => {
@@ -31,7 +33,16 @@ import { UserContext } from "@/context/UserContext";
         // console.log(response.data);
         login(response.data[0])
         navigate("/profile", { state: { userData: response.data } });
+        toast({
+          title: "Login successfully!",
+          description: "Manage your employee now!",
+        });
       } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "Your username or password is incorect.",
+        });
         console.error(error);
       }
     };

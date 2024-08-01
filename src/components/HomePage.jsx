@@ -95,37 +95,9 @@ export default function HomePage() {
     
   }
 
-
-  // const data = [
-  //   {
-  //     name: "ABC",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Active",
-  //     avatar: "https://ui.shadcn.com/avatars/03.png",
-  //   },
-  //   {
-  //     name: "JHK",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Active",
-  //     avatar: "https://ui.shadcn.com/avatars/01.png",
-  //   },
-  //   {
-  //     name: "POI",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Deactive",
-  //     avatar: "https://ui.shadcn.com/avatars/05.png",
-  //   },
-  //   {
-  //     name: "KKK",
-  //     div: "HR",
-  //     salary: "Rp 5000",
-  //     status: "Deactive",
-  //     avatar: "https://ui.shadcn.com/avatars/02.png",
-  //   },
-  // ];
+  const formatCurrency = (amount) => {
+    return parseInt(amount).toLocaleString("id-ID");
+  };
 
   return (
     <div className="flex bg-background">
@@ -176,7 +148,7 @@ export default function HomePage() {
                       {employe.division}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {employe.salary}
+                    Rp{formatCurrency(employe.salary)}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
@@ -265,3 +237,35 @@ export default function HomePage() {
     </div>
   );
 }
+
+
+  // const data = [
+  //   {
+  //     name: "ABC",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Active",
+  //     avatar: "https://ui.shadcn.com/avatars/03.png",
+  //   },
+  //   {
+  //     name: "JHK",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Active",
+  //     avatar: "https://ui.shadcn.com/avatars/01.png",
+  //   },
+  //   {
+  //     name: "POI",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Deactive",
+  //     avatar: "https://ui.shadcn.com/avatars/05.png",
+  //   },
+  //   {
+  //     name: "KKK",
+  //     div: "HR",
+  //     salary: "Rp 5000",
+  //     status: "Deactive",
+  //     avatar: "https://ui.shadcn.com/avatars/02.png",
+  //   },
+  // ];
