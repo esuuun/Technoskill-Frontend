@@ -59,7 +59,7 @@ export default function AddEmployeePage() {
   };
 
   return (
-    <div className="bg-background h-screen w-screen flex">
+    <div className="bg-background h-full w-full flex">
       <DashboardElement />
       <div className="flex flex-col w-screen">
         <HeaderElement />
