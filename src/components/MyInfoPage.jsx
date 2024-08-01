@@ -18,7 +18,7 @@ export default function MyInfoPage() {
       <div className="flex justify-center items-center w-full h-full">
         <Card className="m-10 w-96">
           <CardHeader className="items-center justify-center">
-            <SquareUserRound className="w-64 h-64"/>
+            <SquareUserRound className="w-48 h-48"/>
             <CardTitle className="text-2xl">My Information</CardTitle>
           </CardHeader>
           <CardContent>
