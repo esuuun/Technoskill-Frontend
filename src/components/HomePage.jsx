@@ -49,7 +49,6 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
-<<<<<<< HEAD
 import {
   Select,
   SelectContent,
@@ -58,10 +57,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { ScrollArea } from "./ui/scroll-area";
-=======
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { useNavigate } from "react-router-dom";
->>>>>>> bba5c5e0bb5093f53777c753178397ff7f9583a4
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -329,7 +325,7 @@ export default function HomePage() {
                 className="w-full"
               />
 
-              <label htmlFor="gender">Division</label>
+              <label htmlFor="gender">Gender</label>
 
               <Select id="gender" onValueChange={handleSelectChange}>
                 <SelectTrigger className="w-full">

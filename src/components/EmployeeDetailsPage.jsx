@@ -71,7 +71,7 @@ export default function EmployeeDetailsPage() {
             </div>
             </CardContent>
         <CardFooter className="flex justify-center py-6">
-          <Button onClick={() => navigate("/")}>Back to Home</Button>
+          <Button onClick={() => navigate("/home")}>Back to Home</Button>
         </CardFooter>
       </Card>
     </div>
