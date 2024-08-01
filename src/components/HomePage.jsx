@@ -8,7 +8,6 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from "./ui/card";
 import {
   Table,
@@ -176,7 +175,7 @@ export default function HomePage() {
   const handleSelectChange = (value) => {
     setSelectedEmployee((prev) => ({
       ...prev,
-      division: value,
+      gender: value,
     }));
   };
 
@@ -301,11 +300,6 @@ export default function HomePage() {
                 </TableBody>
               </Table>
             </CardContent>
-            <CardFooter>
-              <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong> employees
-              </div>
-            </CardFooter>
           </ScrollArea>
         </Card>
       </div>
