@@ -10,10 +10,8 @@ const HeroSection = () => {
   const { logout} = useContext(UserContext)
 
   const navigation = [
-    { title: "Features", path: "/" },
-    { title: "Integrations", path: "/" },
-    { title: "Customers", path: "/" },
-    { title: "Pricing", path: "/" },
+    { title: "Features", path: "#features" },
+    { title: "Our Team", path: "#teams" },
   ];
 
   useEffect(() => {
@@ -101,7 +99,7 @@ const HeroSection = () => {
                   {navigation.map((item, idx) => {
                     return (
                       <li key={idx} className="">
-                        <a href={item.path} className="block">
+                        <a href={item.path} className="block text-base hover:text-primary">
                           {item.title}
                         </a>
                       </li>
@@ -116,7 +114,7 @@ const HeroSection = () => {
                     <LayoutDashboard className="h-4 w-4" />
                   </a>
                     </Button>
-                    <Button className="bg-transparent ring-1 ring-muted hover:bg-secondary" onClick={() => logout()}>
+                    <Button className="text-foreground bg-transparent ring-1 ring-ring hover:bg-secondary" onClick={() => logout()}>
                   <a href="/" className="flex gap-2 items-center">
                     Logout
                     <LogOut className="h-4 w-4" />
@@ -158,7 +156,7 @@ const HeroSection = () => {
                   </svg>
                 </p>
               </a></div>
-              <h1 className="text-4xl  font-extrabold sm:text-5xl">
+              <h1 className="text-4xl  font-extrabold sm:text-5xl ">
                 Empower Your Team Management with <span className="underline underline-offset-4 decoration-primary">Team<span className="text-primary">Trackr</span></span>
               </h1>
               <p>
@@ -181,8 +179,8 @@ const HeroSection = () => {
             </div>
             <div className="flex-1 hidden md:block">
               <img
-                src="https://www.tailframes.com/images/browser-mockup.webp"
-                className="max-w-3xl absolute z-10"
+                src="src\assets\img\dashboardImg.png"
+                className="max-w-4xl absolute z-10 rounded-xl"
               />
             </div>
           </div>

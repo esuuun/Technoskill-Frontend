@@ -229,7 +229,7 @@ export default function HomePage() {
                     <TableCell className="font-medium">
                       <Button
                         variant="ghost"
-                        className="p-0 h-auto font-medium text-white hover:text-primary hover:bg-transparent hover:no-underline"
+                        className="p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent hover:no-underline"
                         onClick={() => handleEmployeeClick(employe.id)}
                       >
                         {employe.name}

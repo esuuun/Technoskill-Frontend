@@ -5,13 +5,13 @@ function TeamSection() {
         { name: "Rivi" , avatar : 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=626&ext=jpg&ga=GA1.1.2126674172.1722491212&semt=ais_hybrid', github:'https://github.com/ssantario'}];
 
   return (
-    <section className="bg-background">
+    <section className="bg-background " id="teams">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <h2 className="block w-full bg-gradient-to-b from-foreground to-primary bg-clip-text font-bold text-transparent text-3xl sm:text-4xl">
             Our team
           </h2>
-          <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+          <p className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-400">
             Meet our gentlemen skibidi team
           </p>
         </div>
