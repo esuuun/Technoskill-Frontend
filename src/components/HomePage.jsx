@@ -27,7 +27,7 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { MoreHorizontalIcon } from "lucide-react";
+import { MoreHorizontalIcon, Search } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   AlertDialog,
@@ -64,6 +64,7 @@ export default function HomePage() {
   const [editOpen, setEdit] = useState(false);
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -103,7 +104,8 @@ export default function HomePage() {
       handleHomePage(); //biar ke refresh
       toast({
         title: "Employee Deleted Succesfully!",
-        description: "The employee has been removed. You can no longer view their details on the home screen.",
+        description:
+          "The employee has been removed. You can no longer view their details on the home screen.",
       });
     } catch (error) {
       toast({
@@ -182,7 +184,17 @@ export default function HomePage() {
   const handleEmployeeClick = (employeeId) => {
     navigate(`/employee/${employeeId}`);
   };
-  
+
+  // SEARCH EMPLOYEE
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredData = searchQuery
+  ? data.filter((employee) =>
+      employee.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  : data;
 
   return (
     <div className="flex bg-background">
@@ -190,98 +202,111 @@ export default function HomePage() {
       <div className="flex flex-col w-screen ">
         <HeaderElement />
         <Card className="m-10">
-          <ScrollArea className='h-screen w-full rounded-md border'>
-          <CardHeader>
-            <CardTitle className="text-3xl">Employees</CardTitle>
-            <CardDescription>Manage your employee.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="hidden w-[100px] sm:table-cell">
-                    <span className="sr-only">Image</span>
-                  </TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="hidden md:table-cell">
-                    Division
-                  </TableHead>
-                  <TableHead className="hidden md:table-cell">Salary</TableHead>
-                  <TableHead>
-                    <span className="sr-only">Actions</span>
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.map((employe, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="hidden sm:table-cell">
-                      <Avatar>
-                        {employe.gender === "Male" ? (
-                          <AvatarImage src="https://ui.shadcn.com/avatars/02.png" />
-                        ) : (
-                          <AvatarImage src="https://ui.shadcn.com/avatars/05.png" />
-                        )}
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      <Button
-                        variant="ghost"
-                        className="p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent hover:no-underline"
-                        onClick={() => handleEmployeeClick(employe.id)}
-                      >
-                        {employe.name}
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Badge>Active</Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      {employe.division}
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      Rp{formatCurrency(employe.salary)}
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            aria-haspopup="true"
-                            size="icon"
-                            variant="ghost"
-                          >
-                            <MoreHorizontalIcon className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem
-                            onClick={() => handleEditClick(employe)}
-                          >
-                            Edit
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleDeleteClick(employe)}
-                          >
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
+          <ScrollArea className="h-screen w-full rounded-md border">
+            <CardHeader>
+              <CardTitle className="text-3xl">Employees</CardTitle>
+              <CardDescription>Manage your employee.</CardDescription>
+              <div className="relative w-full max-w-md">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <Search className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <Input
+                  type="search"
+                  onChange={handleSearchChange}
+                  placeholder="Search employee..."
+                  className="block w-full p-4 pl-10 text-sm text-foreground bg-background border border-muted rounded-lg focus:ring-primary focus:border-primary"
+                />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="hidden w-[100px] sm:table-cell">
+                      <span className="sr-only">Image</span>
+                    </TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="hidden md:table-cell">
+                      Division
+                    </TableHead>
+                    <TableHead className="hidden md:table-cell">
+                      Salary
+                    </TableHead>
+                    <TableHead>
+                      <span className="sr-only">Actions</span>
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-          <CardFooter>
-            <div className="text-xs text-muted-foreground">
-              Showing <strong>1-10</strong> of <strong>32</strong> employees
-            </div>
+                </TableHeader>
+                <TableBody>
+                  {filteredData.map((employe, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="hidden sm:table-cell">
+                        <Avatar>
+                          {employe.gender === "Male" ? (
+                            <AvatarImage src="https://ui.shadcn.com/avatars/02.png" />
+                          ) : (
+                            <AvatarImage src="https://ui.shadcn.com/avatars/05.png" />
+                          )}
+                          <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        <Button
+                          variant="ghost"
+                          className="p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent hover:no-underline"
+                          onClick={() => handleEmployeeClick(employe.id)}
+                        >
+                          {employe.name}
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Badge>Active</Badge>
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">
+                        {employe.division}
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">
+                        Rp{formatCurrency(employe.salary)}
+                      </TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              aria-haspopup="true"
+                              size="icon"
+                              variant="ghost"
+                            >
+                              <MoreHorizontalIcon className="h-4 w-4" />
+                              <span className="sr-only">Toggle menu</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem
+                              onClick={() => handleEditClick(employe)}
+                            >
+                              Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => handleDeleteClick(employe)}
+                            >
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+            <CardFooter>
+              <div className="text-xs text-muted-foreground">
+                Showing <strong>1-10</strong> of <strong>32</strong> employees
+              </div>
             </CardFooter>
-            </ScrollArea>
+          </ScrollArea>
         </Card>
       </div>
 
@@ -291,8 +316,8 @@ export default function HomePage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Warning: Permanent Deletion</AlertDialogTitle>
             <AlertDialogDescription>
-              This action will permanently delete data for the selected employee and cannot be undone. 
-              Please confirm that you wish to proceed.
+              This action will permanently delete data for the selected employee
+              and cannot be undone. Please confirm that you wish to proceed.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
