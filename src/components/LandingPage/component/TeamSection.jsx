@@ -1,3 +1,6 @@
+// ini team section di landing page
+// animation pake framer motion
+
 import { motion } from "framer-motion";
 
 function TeamSection() {

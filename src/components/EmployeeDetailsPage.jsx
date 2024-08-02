@@ -1,3 +1,5 @@
+// ini component employee details
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,11 +17,12 @@ import { Badge } from "./ui/badge";
 import { Loader2Icon } from "lucide-react";
 
 export default function EmployeeDetailsPage() {
-  const { id } = useParams();
+  const { id } = useParams(); // ngambil id employee yang di pass dari route sebelumnya
   const navigate = useNavigate();
   const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
+    // fetch employee pake id 
     const fetchEmployeeDetails = async () => {
       try {
         const response = await axios.get(
@@ -34,6 +37,7 @@ export default function EmployeeDetailsPage() {
     fetchEmployeeDetails();
   }, [id]);
 
+  // ini loading state aja kalau belum data nya (belum selesai nge fetch)
   if (!employee) {
     return (
       <div className="flex justify-center w-screen h-screen items-center">
@@ -56,8 +60,8 @@ export default function EmployeeDetailsPage() {
               <AvatarImage
                 src={
                   employee.gender === "Male"
-                    ? "https://ui.shadcn.com/avatars/02.png"
-                    : "https://ui.shadcn.com/avatars/05.png"
+                    ? "https://ui.shadcn.com/avatars/02.png" //avatar kalo cowo
+                    : "https://ui.shadcn.com/avatars/05.png" //avatar kalo cewe
                 }
               />
               <AvatarFallback>{employee.name.charAt(0)}</AvatarFallback>

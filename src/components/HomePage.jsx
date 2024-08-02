@@ -1,3 +1,5 @@
+// ini component home page
+
 import DashboardElement from "./elements/DashboardElement";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -64,10 +66,10 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const { toast } = useToast();
+  const { toast } = useToast(); 
   const navigate = useNavigate();
 
-  
+  // function buat nge fetch semua data employee di data base 
   const handleHomePage = async () => {
     try {
       const response = await axios.get("http://localhost:8000/employee/");
@@ -83,10 +85,9 @@ export default function HomePage() {
     handleHomePage();
   }, []);
 
-  // DELETE EMPLOYEE
+  // function buat nge delete employe
   function handleDeleteClick(employe) {
-    setSelectedEmployee(employe);
-    // console.log(selectedEmployee.id)
+    setSelectedEmployee(employe); 
     setDialogOpen(true);
   }
 
@@ -119,8 +120,7 @@ export default function HomePage() {
     }
   }
 
-  // EDIT EMPLOYEE
-
+  // function buat edit employee
   function handleEditClick(employe) {
     setSelectedEmployee(employe);
     setEdit(true);
@@ -160,10 +160,12 @@ export default function HomePage() {
     }
   }
 
+  // function buat jadiin salary ke rupiah
   const formatCurrency = (amount) => {
     return parseInt(amount).toLocaleString("id-ID");
   };
 
+  // function buat nge handle input kalau di edit
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setSelectedEmployee((prev) => ({
@@ -173,6 +175,7 @@ export default function HomePage() {
     console.log(selectedEmployee);
   };
 
+  // function buat nge handle select kalau di edit
   const handleSelectChange = (value) => {
     setSelectedEmployee((prev) => ({
       ...prev,
@@ -180,12 +183,12 @@ export default function HomePage() {
     }));
   };
 
-  // EMPLOYEE DETAILS
+  // function buat nge pass id dari employee ke route details employee
   const handleEmployeeClick = (employeeId) => {
     navigate(`/employee/${employeeId}`);
   };
 
-  // SEARCH EMPLOYEE
+  // function buat nge search employee
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -196,9 +199,9 @@ export default function HomePage() {
       )
     : data;
   
-  // Total Employee
+  // ini total employee
   const totalEmployee = data.length
-  // Total Salary
+  // ini total salary dari semua employee
   const totalSalary = data.reduce((sum, employee) => sum + parseInt(employee.salary), 0);
 
   return (

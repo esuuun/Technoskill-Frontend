@@ -1,3 +1,5 @@
+// ini component header (avatar dan dark mode toggle) 
+
 import { User2Icon } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import MobileElement from "./MobileElement";

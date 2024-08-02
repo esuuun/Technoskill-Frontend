@@ -1,3 +1,5 @@
+// ini component buat add employee
+
 import { useState } from "react";
 import DashboardElement from "./elements/DashboardElement";
 import axios from "axios";
@@ -24,13 +26,15 @@ import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 
 export default function AddEmployeePage() {
-  const { toast } = useToast();
+  const { toast } = useToast(); // ini dipake buat component toast 
 
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [division, setDivision] = useState("");
   const [salary, setSalary] = useState(null);
 
+
+  // function buat nge handle add employee
   const handleAddEmployee = async () => {
     try {
       const response = await axios.post("http://localhost:8000/employee/add", {

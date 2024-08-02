@@ -1,3 +1,5 @@
+// ini component theme biar bisa dark mode atau light mode
+
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 

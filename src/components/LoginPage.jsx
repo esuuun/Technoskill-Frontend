@@ -1,4 +1,6 @@
-  import { useContext, useState } from "react";
+// ini login component 
+
+import { useContext, useState } from "react";
   import { useNavigate } from "react-router-dom";
   import axios from "axios";
 
@@ -19,10 +21,12 @@ import { useToast } from "./ui/use-toast";
   export default function LoginPage() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useContext(UserContext);
+    const { login } = useContext(UserContext); // ini dipake buat login session nya
     const {toast} = useToast()
 
     const navigate = useNavigate();
+
+    // function buat nge handle login
     const handleLogin = async () => {
       try {
         const response = await axios.post("http://localhost:8000/manager/login", {

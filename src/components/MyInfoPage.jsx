@@ -1,3 +1,5 @@
+// ini component info dari manager yang login
+
 import { useContext, useEffect, useState } from "react";
 
 import DashboardElement from "./elements/DashboardElement";
@@ -16,9 +18,10 @@ import { Input } from "./ui/input";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 export default function MyInfoPage() {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext); // ini buat ngambil user yang lagi login
   const [data, setData] = useState(null);
 
+  // function buat nge handle fetch nama dari user yang lagi login
   const handleProfilePage = async () => {
     try {
       const response = await axios.get(

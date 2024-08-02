@@ -1,3 +1,5 @@
+// Ini component side bar
+
 import { UserContext } from "@/context/UserContext";
 import {
   Home,
@@ -26,6 +28,7 @@ export default function DashboardElement() {
   const location = useLocation();
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  // List menu side bar
   const MenuList = [
     {
       name: "Home",
@@ -44,6 +47,7 @@ export default function DashboardElement() {
     },
   ];
 
+  // function buat buka dialog logout dan logout akun
   const handleLogoutClose = () => {
     setDialogOpen(false)
   }

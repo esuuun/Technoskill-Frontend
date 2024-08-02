@@ -1,3 +1,6 @@
+// ini section feature di landing page
+// animation pake motion framer
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserRoundMinus, UserRoundPen, UserRoundPlus } from "lucide-react";
 import { motion } from "framer-motion";

@@ -13,7 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <UserProvider>
+    // yang ada protected route nya berarti harus login dlu baru bisa masuk
+    // user provider buat user sessionnya
+    <UserProvider> 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage/>} />

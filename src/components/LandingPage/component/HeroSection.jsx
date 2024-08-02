@@ -1,3 +1,6 @@
+// ini hero section di landing page
+// animation pake framer motion
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { UserContext } from "@/context/UserContext";
