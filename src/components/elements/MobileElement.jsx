@@ -10,13 +10,24 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
 
 export default function MobileElement() {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout } = useContext(UserContext);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const MenuList = [
     {
@@ -35,6 +46,15 @@ export default function MobileElement() {
       path: "/profile ",
     },
   ];
+
+  const handleLogoutClose = () => {
+    setDialogOpen(false)
+  }
+
+  const handleLogoutConfirm = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
     <Sheet>
@@ -74,8 +94,7 @@ export default function MobileElement() {
           <span
             className={`mt-2 mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer`}
             onClick={() => {
-              logout();
-              navigate("/");
+              setDialogOpen(true)
             }}
           >
             <LogOut className="h-5 w-5" />
@@ -83,6 +102,26 @@ export default function MobileElement() {
           </span>
         </nav>
       </SheetContent>
+
+      <AlertDialog open={dialogOpen} onOpenChange={handleLogoutClose}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to Logout?</AlertDialogTitle>
+            <AlertDialogDescription>
+            Logging out will end your current session. You will be logged out from your account and need to log in again to access your account. Are you sure you want to proceed?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleLogoutClose} className="ring-0">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleLogoutConfirm}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
     </Sheet>
   );
 }

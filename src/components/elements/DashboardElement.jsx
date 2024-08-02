@@ -6,8 +6,17 @@ import {
   UserRoundPlus,
   LogOut,
 } from "lucide-react";
-import { useContext } from "react";
-
+import { useContext, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -15,6 +24,7 @@ export default function DashboardElement() {
   const { logout } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const MenuList = [
     {
@@ -33,6 +43,15 @@ export default function DashboardElement() {
       path: "/profile",
     },
   ];
+
+  const handleLogoutClose = () => {
+    setDialogOpen(false)
+  }
+
+  const handleLogoutConfirm = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
       
@@ -65,18 +84,37 @@ export default function DashboardElement() {
                 );
               })}
             <div className="bg-secondary w-full h-px"></div>
-            <a
-                    href='/'
+            <div
                     className={`mt-2 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground cursor-pointer`}
-                    onClick={() => logout()}
+                    onClick={()=>setDialogOpen(true)}
                   >
                     <LogOut className="h-4 w-4" />
                     <span>Logout</span>
-                  </a>
+                  </div>
             </nav>
           </div>
           <div className="mt-auto p-4"></div>
-        </div>
+      </div>
+      
+      <AlertDialog open={dialogOpen} onOpenChange={handleLogoutClose}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to Logout?</AlertDialogTitle>
+            <AlertDialogDescription>
+            Logging out will end your current session. You will be logged out from your account and need to log in again to access your account. Are you sure you want to proceed?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleLogoutClose} className="ring-0">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleLogoutConfirm}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       </aside>
   );
 }

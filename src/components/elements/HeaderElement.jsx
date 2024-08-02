@@ -1,6 +1,5 @@
-import { User2, User2Icon } from "lucide-react";
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User2Icon } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import MobileElement from "./MobileElement";
 import { ModeToggle } from "./ModeToggle";
 
