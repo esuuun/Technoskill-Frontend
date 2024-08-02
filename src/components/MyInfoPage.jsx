@@ -16,6 +16,7 @@ import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { motion } from "framer-motion";
 
 export default function MyInfoPage() {
   const { user } = useContext(UserContext); // ini buat ngambil user yang lagi login
@@ -42,9 +43,11 @@ export default function MyInfoPage() {
   return (
     <div className="bg-background h-screen w-screen flex">
       <DashboardElement />
-      <div className="flex flex-col w-screen">
+      <div className="flex flex-col w-screen overflow-hidden">
         <HeaderElement />
-        <div className="flex justify-center items-center w-full h-full">
+        <motion.div animate={{ opacity: 10, y: 0 }}
+          initial={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, type: "spring" }} className="flex justify-center items-center w-full h-full">
           <Card className="m-10 w-96 bg-gradient-to-b from-card to-secondary">
             <CardHeader className="items-center justify-center">
               <Avatar className="h-24 w-24 border-2 border-primary">
@@ -66,7 +69,7 @@ export default function MyInfoPage() {
               )}
             </CardContent>
           </Card>
-        </div>
+          </motion.div>
       </div>
     </div>
   );

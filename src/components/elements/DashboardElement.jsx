@@ -22,6 +22,7 @@ import {
 
 import { useLocation, useNavigate } from "react-router-dom";
 
+
 export default function DashboardElement() {
   const { logout } = useContext(UserContext);
   const navigate = useNavigate();
@@ -58,7 +59,6 @@ export default function DashboardElement() {
   }
 
   return (
-      
       <aside className="hidden border-r bg-muted/40 md:block w-72">
         <div className="flex h-screen max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">

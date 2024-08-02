@@ -28,7 +28,12 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { DollarSignIcon, MoreHorizontalIcon, Search, UsersIcon } from "lucide-react";
+import {
+  DollarSignIcon,
+  MoreHorizontalIcon,
+  Search,
+  UsersIcon,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   AlertDialog,
@@ -59,6 +64,8 @@ import {
 } from "./ui/select";
 import { ScrollArea } from "./ui/scroll-area";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Counter } from "./animate/Counter";
 
 export default function HomePage() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -66,15 +73,15 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const { toast } = useToast(); 
+  const { toast } = useToast();
   const navigate = useNavigate();
 
-  // function buat nge fetch semua data employee di data base 
+  // function buat nge fetch semua data employee di data base
   const handleHomePage = async () => {
     try {
       const response = await axios.get("http://localhost:8000/employee/");
       console.log(response.data);
-      
+
       setData(response.data);
     } catch (error) {
       console.error(error);
@@ -87,7 +94,7 @@ export default function HomePage() {
 
   // function buat nge delete employe
   function handleDeleteClick(employe) {
-    setSelectedEmployee(employe); 
+    setSelectedEmployee(employe);
     setDialogOpen(true);
   }
 
@@ -198,154 +205,207 @@ export default function HomePage() {
         employee.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : data;
-  
+
   // ini total employee
-  const totalEmployee = data.length
+  const totalEmployee = data.length;
   // ini total salary dari semua employee
-  const totalSalary = data.reduce((sum, employee) => sum + parseInt(employee.salary), 0);
+  const totalSalary = data.reduce(
+    (sum, employee) => sum + parseInt(employee.salary),
+    0
+  );
 
   return (
     <div className="flex bg-background">
       <DashboardElement />
-      
-      {/* Total employee and salary */}
+
       <div className="flex flex-col w-screen ">
         <HeaderElement />
+        {/* Total employee and salary */}
         <div className="mx-10 flex gap-3 flex-wrap md:gap-10 justify-center md:justify-normal mt-10 md:mt-0">
-        <Card className='w-fit'>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
-              <CardTitle className="text-sm font-medium">
-                Total Employee
-              </CardTitle>
-              <UsersIcon className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{totalEmployee}</div>
-              <p className="text-xs text-muted-foreground">
-                Total employee of this company
-              </p>
-            </CardContent>
-          </Card>
-          <Card className='w-fit'>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
-              <CardTitle className="text-sm font-medium">
-                Total Salary
-              </CardTitle>
-              <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">Rp{formatCurrency(totalSalary)}</div>
-              <p className="text-xs text-muted-foreground">
-                Total salary of all the employee
-              </p>
-            </CardContent>
-          </Card>
+          <motion.div
+            animate={{ opacity: 10, y: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+          >
+            <Card className="w-fit">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
+              <motion.div
+            animate={{ opacity: 10, y: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+                > 
+                  
+                <CardTitle className="text-sm font-medium">
+                  Total Employee
+                  </CardTitle></motion.div>
+                  <motion.div
+            animate={{ opacity: 10, y: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+          >
+                <UsersIcon className="h-4 w-4 text-muted-foreground" /></motion.div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  <Counter from={0} to={totalEmployee} />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Total employee of this company
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            animate={{ opacity: 10, y: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
+          >
+            <Card className="w-fit">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
+                <motion.div
+                  animate={{ opacity: 10, y: 0 }}
+                  initial={{ opacity: 0, y: 100 }}
+                  transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
+                >
+                  <CardTitle className="text-sm font-medium">
+                    Total Salary
+                  </CardTitle>
+                </motion.div>
+                <motion.div
+                  animate={{ opacity: 10, y: 0 }}
+                  initial={{ opacity: 0, y: 100 }}
+                  transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
+                >
+                  <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
+                </motion.div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold flex">
+                  Rp
+                  <Counter
+                    from={0}
+                    to={totalSalary}
+                    formatter={formatCurrency}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Total salary of all the employee
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
 
         {/* List Semua Employee GEGE */}
-        
-        <Card className="m-10">
-          <ScrollArea className="h-screen w-full rounded-md border">
-            <CardHeader>
-              <CardTitle className="text-3xl">Employees</CardTitle>
-              <CardDescription>Manage your employee.</CardDescription>
-              <div className="relative w-full max-w-md">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Search className="w-5 h-5 text-muted-foreground" />
+        <motion.div
+          animate={{ opacity: 10, y: 0 }}
+          initial={{ opacity: 0, y: 100 }}
+          transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
+        >
+          <Card className="m-10">
+            <ScrollArea className="h-screen w-full rounded-md border">
+              <CardHeader>
+                <CardTitle className="text-3xl">Employees</CardTitle>
+                <CardDescription>Manage your employee.</CardDescription>
+                <div className="relative w-full max-w-md">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Search className="w-5 h-5 text-muted-foreground" />
+                  </div>
+                  <Input
+                    type="search"
+                    onChange={handleSearchChange}
+                    placeholder="Search employee..."
+                    className="block w-full p-4 pl-10 text-sm text-foreground bg-background border border-muted rounded-lg focus:ring-primary focus:border-primary"
+                  />
                 </div>
-                <Input
-                  type="search"
-                  onChange={handleSearchChange}
-                  placeholder="Search employee..."
-                  className="block w-full p-4 pl-10 text-sm text-foreground bg-background border border-muted rounded-lg focus:ring-primary focus:border-primary"
-                />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="hidden w-[100px] sm:table-cell">
-                      <span className="sr-only">Image</span>
-                    </TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Division
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Salary
-                    </TableHead>
-                    <TableHead>
-                      <span className="sr-only">Actions</span>
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredData.map((employe, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="hidden sm:table-cell">
-                        <Avatar>
-                          {employe.gender === "Male" ? (
-                            <AvatarImage src="https://ui.shadcn.com/avatars/02.png" />
-                          ) : (
-                            <AvatarImage src="https://ui.shadcn.com/avatars/05.png" />
-                          )}
-                          <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        <Button
-                          variant="ghost"
-                          className="p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent hover:no-underline"
-                          onClick={() => handleEmployeeClick(employe.id)}
-                        >
-                          {employe.name}
-                        </Button>
-                      </TableCell>
-                      <TableCell>
-                        <Badge>Active</Badge>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        {employe.division}
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        Rp{formatCurrency(employe.salary)}
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <MoreHorizontalIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem
-                              onClick={() => handleEditClick(employe)}
-                            >
-                              Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => handleDeleteClick(employe)}
-                            >
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="hidden w-[100px] sm:table-cell">
+                        <span className="sr-only">Image</span>
+                      </TableHead>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="hidden md:table-cell">
+                        Division
+                      </TableHead>
+                      <TableHead className="hidden md:table-cell">
+                        Salary
+                      </TableHead>
+                      <TableHead>
+                        <span className="sr-only">Actions</span>
+                      </TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </ScrollArea>
-        </Card>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredData.map((employe, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="hidden sm:table-cell">
+                          <Avatar>
+                            {employe.gender === "Male" ? (
+                              <AvatarImage src="https://ui.shadcn.com/avatars/02.png" />
+                            ) : (
+                              <AvatarImage src="https://ui.shadcn.com/avatars/05.png" />
+                            )}
+                            <AvatarFallback>CN</AvatarFallback>
+                          </Avatar>
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          <Button
+                            variant="ghost"
+                            className="p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent hover:no-underline"
+                            onClick={() => handleEmployeeClick(employe.id)}
+                          >
+                            {employe.name}
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Badge>Active</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {employe.division}
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          Rp{formatCurrency(employe.salary)}
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontalIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem
+                                onClick={() => handleEditClick(employe)}
+                              >
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => handleDeleteClick(employe)}
+                              >
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </ScrollArea>
+          </Card>
+        </motion.div>
       </div>
 
       {/* Delete Dialog */}
@@ -426,34 +486,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-// const data = [
-//   {
-//     name: "ABC",
-//     div: "HR",
-//     salary: "Rp 5000",
-//     status: "Active",
-//     avatar: "https://ui.shadcn.com/avatars/03.png",
-//   },
-//   {
-//     name: "JHK",
-//     div: "HR",
-//     salary: "Rp 5000",
-//     status: "Active",
-//     avatar: "https://ui.shadcn.com/avatars/01.png",
-//   },
-//   {
-//     name: "POI",
-//     div: "HR",
-//     salary: "Rp 5000",
-//     status: "Deactive",
-//     avatar: "https://ui.shadcn.com/avatars/05.png",
-//   },
-//   {
-//     name: "KKK",
-//     div: "HR",
-//     salary: "Rp 5000",
-//     status: "Deactive",
-//     avatar: "https://ui.shadcn.com/avatars/02.png",
-//   },
-// ];

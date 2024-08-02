@@ -24,6 +24,7 @@ import {
 } from "./ui/select";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
+import { motion } from "framer-motion";
 
 export default function AddEmployeePage() {
   const { toast } = useToast(); // ini dipake buat component toast 
@@ -63,11 +64,15 @@ export default function AddEmployeePage() {
   };
 
   return (
+   
     <div className="bg-background h-full w-full flex">
       <DashboardElement />
       <div className="flex flex-col w-screen">
         <HeaderElement />
-        <div className="flex justify-center items-center h-full w-full">
+
+        <motion.div animate={{ opacity: 10, y: 0 }}
+          initial={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, type: "spring" }} className="flex justify-center items-center h-full w-full">
           <Card className="m-10 w-96">
             <CardHeader className="justify-left items-left">
               <CardTitle className="text-3xl">Add New Employee</CardTitle>
@@ -123,8 +128,8 @@ export default function AddEmployeePage() {
               </Button>
             </CardFooter>
           </Card>
-        </div>
+          </motion.div>
       </div>
-    </div>
+      </div>
   );
 }
