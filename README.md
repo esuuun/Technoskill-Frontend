@@ -1,4 +1,5 @@
 # **TeamTrackr**
+![image](https://github.com/user-attachments/assets/6f57730b-5ca4-4981-be4a-5b91c91f1902)
 
 TeamTrackr adalah sebuah website yang dirancang untuk mempermudah manajemen karyawan dalam sebuah organisasi. Website ini memungkinkan pengguna untuk register akun, login, menambahkan, menghapus, dan mencari data karyawan secara efisien. TeamTrackr merupakan bagian dari proyek Technoskill 1.0
 
@@ -17,6 +18,18 @@ TeamTrackr adalah sebuah website yang dirancang untuk mempermudah manajemen kary
 
 * ### **Halaman Informasi Profil**
    Menampilkan informasi profil pengguna yang sedang login.
+
+
+## **Fitur Tambahan**
+
+- **Light/dark mode toggle** : Switch between light and dark themes for enhanced user comfort.
+- **Search function** : Easily find employe you searching for
+- **Responsive** :  Ensures optimal viewing and interaction experience across a wide range of devices.
+- **Landing page** : Welcome users with a dedicated landing page that introduces our app and its features.
+- **Login required on dashboard page** : Users must now authenticate to access any dashboard page, ensuring security and personalized user experiences.
+- **Total employee count** : View the total number of employees managed by the app.
+- **Total salary calculation**: See the cumulative salary of all employees for easy financial tracking.
+
 
 ## **Kreator**
 TeamTrackr dikembangkan oleh tim yang terdiri dari tiga orang:
