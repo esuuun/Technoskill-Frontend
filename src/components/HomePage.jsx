@@ -229,21 +229,22 @@ export default function HomePage() {
           >
             <Card className="w-fit">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
-              <motion.div
-            animate={{ opacity: 10, y: 0 }}
-            initial={{ opacity: 0, y: 100 }}
-            transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-                > 
-                  
-                <CardTitle className="text-sm font-medium">
-                  Total Employee
-                  </CardTitle></motion.div>
-                  <motion.div
-            animate={{ opacity: 10, y: 0 }}
-            initial={{ opacity: 0, y: 100 }}
-            transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-          >
-                <UsersIcon className="h-4 w-4 text-muted-foreground" /></motion.div>
+                <motion.div
+                  animate={{ opacity: 10, y: 0 }}
+                  initial={{ opacity: 0, y: 100 }}
+                  transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+                >
+                  <CardTitle className="text-sm font-medium">
+                    Total Employee
+                  </CardTitle>
+                </motion.div>
+                <motion.div
+                  animate={{ opacity: 10, y: 0 }}
+                  initial={{ opacity: 0, y: 100 }}
+                  transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+                >
+                  <UsersIcon className="h-4 w-4 text-muted-foreground" />
+                </motion.div>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">

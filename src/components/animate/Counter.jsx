@@ -18,7 +18,7 @@ export function Counter({ from, to, formatter }) {
     });
 
     return () => controls.stop();
-  }, [from, to, formatter]);
+  }, [from, to]);
 
   return <p ref={nodeRef} />;
 }
