@@ -26,7 +26,7 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { MoreHorizontalIcon, Search } from "lucide-react";
+import { DollarSignIcon, MoreHorizontalIcon, Search, UsersIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   AlertDialog,
@@ -67,11 +67,12 @@ export default function HomePage() {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  
   const handleHomePage = async () => {
     try {
       const response = await axios.get("http://localhost:8000/employee/");
       console.log(response.data);
-
+      
       setData(response.data);
     } catch (error) {
       console.error(error);
@@ -190,16 +191,56 @@ export default function HomePage() {
   };
 
   const filteredData = searchQuery
-  ? data.filter((employee) =>
-      employee.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  : data;
+    ? data.filter((employee) =>
+        employee.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : data;
+  
+  // Total Employee
+  const totalEmployee = data.length
+  // Total Salary
+  const totalSalary = data.reduce((sum, employee) => sum + parseInt(employee.salary), 0);
 
   return (
     <div className="flex bg-background">
       <DashboardElement />
+      
+      {/* Total employee and salary */}
       <div className="flex flex-col w-screen ">
         <HeaderElement />
+        <div className="mx-10 flex gap-3 flex-wrap md:gap-10 justify-center md:justify-normal mt-10 md:mt-0">
+        <Card className='w-fit'>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
+              <CardTitle className="text-sm font-medium">
+                Total Employee
+              </CardTitle>
+              <UsersIcon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{totalEmployee}</div>
+              <p className="text-xs text-muted-foreground">
+                Total employee of this company
+              </p>
+            </CardContent>
+          </Card>
+          <Card className='w-fit'>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 gap-8">
+              <CardTitle className="text-sm font-medium">
+                Total Salary
+              </CardTitle>
+              <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">Rp{formatCurrency(totalSalary)}</div>
+              <p className="text-xs text-muted-foreground">
+                Total salary of all the employee
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* List Semua Employee GEGE */}
+        
         <Card className="m-10">
           <ScrollArea className="h-screen w-full rounded-md border">
             <CardHeader>
