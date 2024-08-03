@@ -28,7 +28,8 @@ TeamTrackr adalah sebuah website yang dirancang untuk mempermudah manajemen kary
 - **Landing page** : Welcome users with a dedicated landing page that introduces our app and its features.
 - **Login required on dashboard page** : Users must now authenticate to access any dashboard page, ensuring security and personalized user experiences.
 - **Total employee count** : View the total number of employees managed by the app.
-- **Total salary calculation**: See the cumulative salary of all employees for easy financial tracking.
+- **Total salary calculation** : See the cumulative salary of all employees for easy financial tracking.
+- **Animation** : Smooth animation using framer motion
 
 
 ## **Kreator**
