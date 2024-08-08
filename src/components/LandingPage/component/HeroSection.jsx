@@ -219,7 +219,7 @@ const HeroSection = () => {
               transition={{ duration: 2 }}
             >
               <img
-                src="public\img\dashboardImg.png"
+                src="/assets/img/dashboardImg.png"
                 className="max-w-4xl absolute z-10 rounded-xl"
               />
             </motion.div>
