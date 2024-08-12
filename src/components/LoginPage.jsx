@@ -29,7 +29,7 @@ import { useToast } from "./ui/use-toast";
     // function buat nge handle login
     const handleLogin = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/manager/login", {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/manager/login`, {
           name,
           password,
         });

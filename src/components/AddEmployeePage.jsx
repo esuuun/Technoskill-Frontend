@@ -38,7 +38,7 @@ export default function AddEmployeePage() {
   // function buat nge handle add employee
   const handleAddEmployee = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/employee/add", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/employee/add`, {
         name: name,
         gender: gender,
         division: division,

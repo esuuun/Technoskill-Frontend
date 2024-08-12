@@ -26,7 +26,7 @@ export default function MyInfoPage() {
   const handleProfilePage = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/manager/${user.name}`
+        `${import.meta.env.VITE_API_URL}/manager/${user.name}`
       );
       console.log(response.data);
       setData(response.data.name);

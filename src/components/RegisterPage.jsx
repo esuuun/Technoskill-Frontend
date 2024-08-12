@@ -37,7 +37,7 @@ export default function RegisterPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/manager/register",
+        `${import.meta.env.VITE_API_URL}/manager/register`,
         {
           name,
           password,

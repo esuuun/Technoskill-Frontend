@@ -79,7 +79,7 @@ export default function HomePage() {
   // function buat nge fetch semua data employee di data base
   const handleHomePage = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/employee/");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/employee/`);
       console.log(response.data);
 
       setData(response.data);

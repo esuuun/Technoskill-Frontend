@@ -26,7 +26,7 @@ export default function EmployeeDetailsPage() {
     const fetchEmployeeDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/employee/${id}`
+          `${import.meta.env.VITE_API_URL}/employee/${id}`
         );
         setEmployee(response.data);
       } catch (error) {
